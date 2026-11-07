@@ -60,3 +60,28 @@ This makes the dashboard and API same-origin, avoiding the HTTPS-to-HTTP browser
 - **Settings** — Home Assistant connection.
 
 The app discovers additional climate, fan, light, switch, media-player and selected environmental sensor entities returned by Home Assistant. The initial list provides friendly labels for the devices you shared.
+
+
+## One-tap-ish Samsung TV installation using Apps2Samsung (no Tizen Studio)
+
+Every push to `main` runs the Tizen WGT build workflow and publishes/replaces the latest package at the GitHub Release tag `nuvorahome-latest`.
+
+- Latest WGT: [NuvoraHome.wgt](https://github.com/mcarahulsharma/NuvoraHome/releases/download/nuvorahome-latest/NuvoraHome.wgt)
+- Build workflow: [Tizen WGT build](https://github.com/mcarahulsharma/NuvoraHome/actions/workflows/tizen-build.yml)
+
+### Install from an Android phone
+
+1. Install Apps2Samsung from its official [GitHub releases](https://github.com/Apps2Samsung/Apps2Samsung/releases) or add its F-Droid repository: `https://apps2samsung.com/fdroid/repo`.
+2. On the Samsung TV, open Apps, enter `12345` with the remote, enable Developer Mode, and set Host PC IP to the phone's current Wi-Fi IPv4 address. Restart the TV.
+3. Connect the phone to the same Wi-Fi network and open Apps2Samsung.
+4. Select the TV. On first use, Apps2Samsung guides you through Samsung sign-in and creates the signing certificate. The app reuses that certificate for later installs.
+5. Choose the custom WGT option and use the latest WGT download above (download it to the phone first if the app asks for a local file).
+6. Install and launch Nuvora Home.
+
+The WGT built by GitHub is intentionally unsigned. Apps2Samsung signs it for your TV using its certificate flow. Do not upload private certificate files to this repository.
+
+### Home Assistant connection
+
+For the first reliable test, serve the app from Home Assistant's `/local/nuvora-home/` folder so the app and Home Assistant API share the same origin. GitHub Pages is useful for the public project and source, but its HTTPS page may be blocked from calling a plain HTTP LAN Home Assistant URL by browser mixed-content rules.
+
+**Note:** Apps2Samsung requires Developer Mode for sideload installation. Its phone app handles the signing/install workflow; it does not remove Samsung's Developer Mode requirement.
