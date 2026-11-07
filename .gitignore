@@ -1,0 +1,7 @@
+.buildResult/
+*.wgt
+*.p12
+*.pem
+*.keystore
+profiles.xml
+*.cert
