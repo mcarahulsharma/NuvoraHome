@@ -14,6 +14,7 @@
   <tizen:application id="NuvoraHome.NuvoraHome" package="NuvoraHome" required_version="2.3"/>
   <tizen:profile name="tv-samsung"/>
   <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
   <tizen:setting screen-orientation="landscape"
                  context-menu="disable"
                  background-support="disable"
