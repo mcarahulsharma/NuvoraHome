@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="https://mcarahulsharma.github.io/NuvoraHome/"
+        version="1.0.0"
+        viewmodes="maximized">
+  <name>Nuvora Home</name>
+  <content src="index.html"/>
+  <description>A premium Home Assistant control centre for Samsung Smart TVs.</description>
+  <author href="https://github.com/mcarahulsharma">CenturianRahul Studios</author>
+  <icon src="icon.svg"/>
+  <access origin="*" subdomains="true"/>
+  <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+  <tizen:application id="NuvoraHome.NuvoraHome" package="NuvoraHome" required_version="2.3"/>
+  <tizen:profile name="tv-samsung"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:setting screen-orientation="landscape"
+                 context-menu="disable"
+                 background-support="disable"
+                 encryption="disable"
+                 install-location="auto"
+                 hwkey-event="enable"/>
+</widget>
