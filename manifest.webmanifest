@@ -1,11 +1,1 @@
-{
-  "name": "Nuvora Home",
-  "short_name": "Nuvora",
-  "start_url": "./",
-  "display": "standalone",
-  "orientation": "landscape",
-  "background_color": "#080c16",
-  "theme_color": "#090d18",
-  "description": "Premium Home Assistant control centre for your TV.",
-  "icons": []
-}
+{"name":"Nuvora Home","short_name":"Nuvora","start_url":"./","display":"standalone","background_color":"#080b13","theme_color":"#080b13","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}

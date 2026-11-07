@@ -1,7 +1,6 @@
+dist/
 .buildResult/
 *.wgt
-*.p12
-*.pem
+*.jks
 *.keystore
-profiles.xml
-*.cert
+keystore.properties

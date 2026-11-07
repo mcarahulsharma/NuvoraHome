@@ -1,4 +1,4 @@
-name: Build and publish Nuvora Home for Samsung TV
+name: Build and publish Nuvora Home TV launcher
 
 on:
   push:
@@ -14,8 +14,7 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-
-      - name: Validate Tizen application descriptor
+      - name: Validate Tizen package
         run: |
           test -f config.xml
           test -f index.html
@@ -23,34 +22,28 @@ jobs:
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           ET.parse("config.xml")
-          print("Tizen config.xml is valid XML")
+          print("Tizen descriptor is valid XML")
           PY
-
-      - name: Build unsigned Tizen WGT
+      - name: Build unsigned WGT
         run: |
           mkdir -p dist
           zip -X -r dist/NuvoraHome.wgt config.xml index.html icon.svg manifest.webmanifest sw.js
-          unzip -l dist/NuvoraHome.wgt
-          test -s dist/NuvoraHome.wgt
-
+          unzip -t dist/NuvoraHome.wgt
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NuvoraHome-WGT
+          name: NuvoraHome-TV-Launcher
           path: dist/NuvoraHome.wgt
           if-no-files-found: error
           retention-days: 30
-
       - name: Publish latest installable package
         uses: softprops/action-gh-release@v2
         with:
           tag_name: nuvorahome-latest
-          name: Nuvora Home - Latest Samsung TV build
+          name: Nuvora Home - Samsung TV Launcher
           body: |
-            Automatically built from the latest main branch.
-
-            Download NuvoraHome.wgt and install it using Apps2Samsung.
-            Apps2Samsung handles Samsung signing and TV installation.
+            Fresh launcher build for Samsung Tizen TVs.
+            Download NuvoraHome.wgt and install using Apps2Samsung.
           files: dist/NuvoraHome.wgt
           overwrite_files: true
           make_latest: true
