@@ -39,3 +39,24 @@ Do not put access tokens in source files, issues, screenshots or commits. Use a 
 
 ## Samsung TV note
 This first release is a web app intended to be opened in the TV's browser. A native Samsung Tizen `.wgt` package requires a Tizen TV certificate/profile and device-specific installation/signing; GitHub Pages alone does not install a native TV app.
+
+
+## Samsung TV and Home Assistant networking
+
+The GitHub Pages copy is delivered over HTTPS. Modern browsers can block requests from that HTTPS page to a plain HTTP Home Assistant URL on your LAN (mixed content). For a local-only Home Assistant installation such as `http://192.168.29.17:8123`, the most reliable browser test is to serve the app from Home Assistant itself:
+
+1. Copy the app files (`index.html`, `manifest.webmanifest`, `sw.js`, and `icon.svg`) into `/config/www/nuvora-home/`.
+2. Open `http://192.168.29.17:8123/local/nuvora-home/` on the TV browser.
+3. In Nuvora settings, use the same Home Assistant address: `http://192.168.29.17:8123`.
+
+This makes the dashboard and API same-origin, avoiding the HTTPS-to-HTTP browser restriction and separate CORS setup. If you prefer the GitHub Pages URL, use a trusted HTTPS address for Home Assistant and allow the Pages origin in Home Assistant's `http.cors_allowed_origins` configuration. Merge that setting into any existing `http:` section; do not create a duplicate YAML key.
+
+## Six TV views
+- **Overview** — household status and air quality.
+- **Climate** — ACs and fan controls.
+- **Lighting** — smart plugs, switches and lights.
+- **Entertainment** — Samsung TVs and Jio set-top box.
+- **Environment** — discovered AQI, temperature and humidity sensors.
+- **Settings** — Home Assistant connection.
+
+The app discovers additional climate, fan, light, switch, media-player and selected environmental sensor entities returned by Home Assistant. The initial list provides friendly labels for the devices you shared.
