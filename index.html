@@ -44,6 +44,22 @@
 <div class="modalback" id="detailModal"><div class="modal"><h2 id="detailTitle">Device</h2><p id="detailDesc">Device controls</p><div class="detail-controls" id="detailControls"></div><div class="modalactions"><button class="btn" id="closeDetail">Close</button></div></div></div>
 <div class="toast" id="toast"></div><div id="remoteDebug" aria-live="polite" style="position:fixed;right:18px;bottom:14px;z-index:50;padding:9px 13px;border:1px solid #a99cff55;border-radius:12px;background:#10182bea;color:#dce3f6;font:11px/1.45 monospace;box-shadow:0 8px 28px #0006;pointer-events:none;max-width:48vw">REMOTE · waiting for key</div>
 <script>
+(function(){
+  var box=document.getElementById('remoteDebug');
+  function show(s){if(box){box.textContent=s;}}
+  show('BOOT CHECK · diagnostic script running');
+  window.onerror=function(message,source,line,column,error){
+    show('JS ERROR · '+String(message).slice(0,110)+' · line '+line);
+    return false;
+  };
+  document.addEventListener('keydown',function(e){
+    var key=e.key||e.keyCode||e.which;
+    show('RAW KEY RECEIVED · '+String(key)+' ('+(e.keyCode||e.which)+')');
+  },true);
+  window.addEventListener('load',function(){if(box&&box.textContent.indexOf('RAW KEY')!==0&&box.textContent.indexOf('JS ERROR')!==0)show('BOOT CHECK · page loaded; waiting for remote');});
+})();
+</script>
+<script>
 (()=>{'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let known=[
